@@ -24,6 +24,13 @@ class User extends Model {
     return this;
   }
 
+  /* Criando relacionamento com a tabela files, esse método adiciona o id do avatar
+    *dentro do model usuário
+    */
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+  }
+
   // Compara se a senha passada é igual a que está salva no banco.
   checkPassword(password) {
     return bcrypt.compare(password, this.passwordhash);
